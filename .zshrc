@@ -113,7 +113,7 @@ setopt completealiases
 zstyle ':completion:*' menu select
 setopt  HIST_IGNORE_ALL_DUPS
 #setopt histignoredups histnostore histverify histignorespace extended_history  share_history
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /$HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 autoload -U url-quote-magic
 zle -N self-insert url-quote-magic
 
