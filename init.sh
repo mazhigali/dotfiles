@@ -9,5 +9,7 @@ git clone https://github.com/mazhigali/dotfiles.git
 cd dotfiles
 mkdir $HOME/.config/nvim
 
-ln -s .zshrc       $HOME/.zshrc
-ln -s init.vim       $HOME/.config/nvim/init.vim
+cp .zshrc       $HOME/.zshrc
+cp init.vim       $HOME/.config/nvim/init.vim
+#ln -s .zshrc       $HOME/.zshrc
+#ln -s init.vim       $HOME/.config/nvim/init.vim
