@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export DOTFILES=$HOME/.dotfiles
+export DOTFILES=$HOME/dotfiles
 
 yum -y install zsh mc git curl neovim tmux
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
