@@ -8,6 +8,7 @@ curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.g
 rm .zshrc
 git clone https://github.com/mazhigali/dotfiles.git
 cd dotfiles
+mkdir $HOME/.config
 mkdir $HOME/.config/nvim
 
 cp $DOTFILES/.zshrc       $HOME/.zshrc
