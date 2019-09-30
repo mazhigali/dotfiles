@@ -9,7 +9,8 @@
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="refined"
+#ZSH_THEME="refined"
+ZSH_THEME="xiong-chiamiov-plus"
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
 # cause zsh load theme from this variable instead of
@@ -60,17 +61,18 @@ ZSH_THEME="refined"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-#  git
+  gitfast
   zsh-completions
 #  colorize
-  command-not-found
   extract
-#  cp
   fasd
-#  vi-mode
   colored-man-pages
   golang
   transfer
+  sprunge
+  #timer
+  docker
+
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -107,14 +109,47 @@ alias nv='nvim'
 #alias pars='python -m justext -s Russian -o ~/Dropbox/projects/seo/new.txt'
 #alias term='python ~/Dropbox/projects/seo/term.py'
 
+alias docker_clean_images='docker rmi $(docker images -a --filter=dangling=true -q)'
+alias docker_clean_ps='docker rm $(docker ps --filter=status=exited --filter=status=created -q)'
+
 autoload -U compinit && compinit
 compinit
 setopt completealiases
 zstyle ':completion:*' menu select
+
+# Игнopupoвaть вce пoвтopeнuя команд
 setopt  HIST_IGNORE_ALL_DUPS
-#setopt histignoredups histnostore histverify histignorespace extended_history  share_history
-source /$HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
 autoload -U url-quote-magic
 zle -N self-insert url-quote-magic
 
+#PROMPT
+#autoload -U promptinit
+#promptinit
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+#The first comes back in directory history (Alt+Left), the second let the user go to the parent directory (Alt+Up). They also display the directory content.
+cdUndoKey() {
+  popd
+  zle       reset-prompt
+  echo
+  ls
+  zle       reset-prompt
+}
+
+cdParentKey() {
+  pushd ..
+  zle      reset-prompt
+  echo
+  ls
+  zle       reset-prompt
+}
+
+zle -N                 cdParentKey
+zle -N                 cdUndoKey
+bindkey '^[[1;3A'      cdParentKey
+bindkey '^[[1;3D'      cdUndoKey
+#The first comes back in directory history (Alt+Left), the second let the user go to the parent directory (Alt+Up). They also display the directory content.
+
