@@ -133,7 +133,16 @@ colorscheme base16-default-dark
 "colorscheme base16-gruvbox-light-soft
 
 set termguicolors
-highlight lCursor guifg=NONE guibg=Cyan
+"highlight lCursor guifg=NONE guibg=Cyan
+"highlight Cursor guifg=white guibg=black
+"highlight iCursor guifg=white guibg=steelblue
+set guicursor=n-v-c:block-Cursor
+"set guicursor+=i:ver30-Cursor
+"set guicursor+=n-v-c:blinkon0
+set guicursor+=i:blinkon10
+
+nnoremap <F8> :colorscheme base16-gruvbox-light-soft<CR>
+nnoremap <Leader><F8> :colorscheme base16-default-dark<CR>
 
 "----------------------------------------------
 " Plugin: Shougo/deoplete.nvim
@@ -527,4 +536,3 @@ let g:prettier#config#html_whitespace_sensitivity = 'css'
 " false|true
 " default: 'false'
 let g:prettier#config#require_pragma = 'false'
-
