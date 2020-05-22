@@ -22,26 +22,38 @@ Plug 'andymass/vim-matchup' " extends vim's % key to language-specific words ins
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree' , { 'on': 'NERDTreeToggle' }
 
+" Fuzzy Search
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " fuzzy search file
 Plug 'junegunn/fzf.vim'
 "
 Plug 'fatih/vim-go' , { 'for': 'go', 'do': ':GoUpdateBinaries' } " GOLANG support
 "Plug 'deoplete-plugins/deoplete-go', { 'do': 'make', 'for': 'go'} "GOLANG support
+"
+"" Syntax Highlighting And Indentation For 100+ Languages
 Plug 'sheerun/vim-polyglot'
 "
 "Plug 'zchee/deoplete-jedi' , { 'for': 'python' } " автокомплет для Python
 
 "Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx']}
 "Plug 'carlitux/deoplete-ternjs' , { 'for': ['javascript', 'javascript.jsx'] }
+"
 Plug 'prettier/vim-prettier', {'do': 'npm install','for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 "Plug 'neomake/neomake' , { 'on': 'Neomake', 'for': ['javascript', 'javascript.jsx'] }
 
 "Plug 'zchee/deoplete-clang', { 'for': ['c', 'cpp', 'objc'] }
 "Plug 'rhysd/vim-clang-format', { 'for': ['c', 'cpp', 'objc'] }
+"
+" Git
+Plug 'tpope/vim-fugitive'
+Plug 'mhinz/vim-signify'
 
+"showing different levels of parentheses in different color
+Plug 'luochen1990/rainbow'
 
 " Colorschemes
 Plug 'chriskempson/base16-vim'
+
+"Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
@@ -242,12 +254,12 @@ nnoremap <Leader><F8> :colorscheme base16-default-dark<CR>
 "----------------------------------------------
 " Language: Golang
 "----------------------------------------------
-" Run goimports when running gofmt
-"let g:go_fmt_command = "goimports"
-"let g:go_def_mode='gopls'
-let g:go_info_mode='gopls'
-""let g:go_info_mode = 'gocode'
-""let g:go_info_mode = 'guru'
+"  https://github.com/fatih/vim-go/blob/master/doc/vim-go.txt
+"
+"let g:go_info_mode = 'guru'
+"
+"Automatically discards/add import path based on the code
+let g:go_imports_autosave = 1
 
 " Enable syntax highlighting per default
 let g:go_highlight_functions = 1
@@ -271,8 +283,8 @@ let g:go_addtags_transform = "camelcase"
 "" Show type information
 let g:go_auto_type_info = 1
 
-"" Highlight variable uses
-""let g:go_auto_sameids = 1
+ "Highlight variable uses
+"let g:go_auto_sameids = 1
 
 "----------------------------------------------
 " vim-go Mappings
@@ -285,8 +297,6 @@ au FileType go nmap <Leader>cr :GoCallers<CR>
 au FileType go nmap <Leader>ce :GoCallees<CR>
 au FileType go nmap <Leader>? :GoCoverageToggle<CR>
 "au FileType go nmap <Leader>D :GoDefPop<CR>
-au FileType go nmap <Leader>v :GoImplements<CR>
-au FileType go nmap <Leader>I :GoImports<CR>
 au FileType go nmap <Leader>i :GoInstall<CR>
 "au FileType go nmap <Leader>p :GoPlay<CR>
 au FileType go nmap <Leader>' :GoDocBrowser<CR>
@@ -302,7 +312,7 @@ au FileType go nmap <Leader>rv <Plug>(go-run-vertical)
 au FileType go nmap <Leader>,, :GoAlternate<CR>
 au FileType go nmap <Leader>T :GoTestFunc
 au FileType go nmap <Leader>t :GoTest
-au FileType go nmap <Leader>r :GoReferrers<CR>
+"au FileType go nmap <Leader>r :GoReferrers<CR>
 au FileType go nmap <Leader>cp :GoChannelPeers<CR>
 "au FileType go nmap <Leader>d :GoDef<CR>
 au FileType go nmap <Leader>k :GoInfo<CR>
@@ -409,11 +419,29 @@ imap <c-x><c-l> <plug>(fzf-complete-line)
 " Move between buffers with Shift + arrow key...
 nnoremap <S-Left> :bprevious<cr>
 nnoremap <S-Right> :bnext<cr>
+"
+" Switching tabs quickly
+noremap <leader>1 1gt
+noremap <leader>2 2gt
+noremap <leader>3 3gt
+noremap <leader>4 4gt
+noremap <leader>5 5gt
+noremap <leader>6 6gt
+noremap <leader>7 7gt
+noremap <leader>8 8gt
+noremap <leader>9 9gt
+noremap <leader>0 :tablast<cr>
+
+nnoremap <C-left> :tabprevious<CR>
+nnoremap <C-right> :tabnext<CR>
+nnoremap <C-t> :tabnew<CR>
+nnoremap <leader>w :tabclose<CR>
 
 "----------------------------------------------
 " search with CtrlSF
 "----------------------------------------------
 nnoremap <C-f> "_:CtrlSF 
+let g:ctrlsf_winsize = '100'
 let g:ctrlsf_case_sensitive = 'no'
 let g:ctrlsf_position = 'bottom'
 let g:ctrlsf_ignore_dir = ['node_modules', '.git', 'deps']
@@ -424,6 +452,14 @@ if executable('rg')
     \ }
 endif
 
+let g:ctrlsf_auto_close = {
+    \ "normal" : 0,
+    \ "compact": 0
+    \}
+let g:ctrlsf_auto_focus = {
+    \ "at": "start"
+    \ }
+
 "----------------------------------------------
 " Plugin: Ultisnips
 "----------------------------------------------
@@ -433,6 +469,7 @@ let g:UltiSnipsListSnippets="<A-tab>"
 " -------------------------------------------------------------------------------------------------
 " Plugin: coc.nvim default settings
 " -------------------------------------------------------------------------------------------------
+"  https://github.com/neoclide/coc.nvim/tree/d5fdd2438119f2a82f6bda681642f246af2f0361
 
 " if hidden is not set, TextEdit might fail.
 set hidden
@@ -466,16 +503,33 @@ nmap <silent> [c <Plug>(coc-diagnostic-prev)
 nmap <silent> ]c <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
-nmap <Leader> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gt <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-" Use U to show documentation in preview window
-nnoremap <silent> U :call <SID>show_documentation()<CR>
-
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
+
+" Use U to show documentation in preview window
+nnoremap <silent> U :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+"" Add (Neo)Vim's native statusline support.
+"" NOTE: Please see `:h coc-status` for integrations with external plugins that
+"" provide custom statusline: lightline.vim, vim-airline.
+"set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
 
 " Remap for format selected region
 vmap <leader>f  <Plug>(coc-format-selected)
@@ -487,7 +541,7 @@ nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
 " Show commands
 nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
 " Find symbol of current document
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+nnoremap <silent> <space>f  :<C-u>CocList outline<cr>
 " Search workspace symbols
 nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
@@ -536,3 +590,11 @@ let g:prettier#config#html_whitespace_sensitivity = 'css'
 " false|true
 " default: 'false'
 let g:prettier#config#require_pragma = 'false'
+
+" #SIGNIFY {{{
+" Check for only Git
+let g:signify_vcs_list = [ 'git' ]
+
+" RAINBOW {{{
+let g:rainbow_active = 1
+" }}}

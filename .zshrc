@@ -130,7 +130,8 @@ zle -N self-insert url-quote-magic
 #promptinit
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /$HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fpath=(path/to/zsh-completions/src $fpath)
 
 #The first comes back in directory history (Alt+Left), the second let the user go to the parent directory (Alt+Up). They also display the directory content.
 cdUndoKey() {

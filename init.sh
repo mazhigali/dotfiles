@@ -2,9 +2,10 @@
 
 export DOTFILES=$HOME/dotfiles
 
-yum -y install zsh mc git curl neovim tmux xclip nnn rclone
+yum -y install zsh mc git curl neovim tmux xclip nnn rclone rg
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
+git clone https://github.com/zsh-users/zsh-completions.git
 
 rm .zshrc
 git clone https://github.com/mazhigali/dotfiles.git
