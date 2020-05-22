@@ -23,5 +23,4 @@ cp $DOTFILES/.zshrc       $HOME/.zshrc
 cp $DOTFILES/init.vim       $HOME/.config/nvim/init.vim
 cp $DOTFILES/.tmux.conf       $HOME/
 
-
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
