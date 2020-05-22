@@ -2,10 +2,16 @@
 
 export DOTFILES=$HOME/dotfiles
 
-yum -y install zsh mc git curl neovim tmux xclip nnn rclone rg
+yum -y https://repo.ius.io/ius-release-el7.rpm
+yum-config-manager --add-repo=https://copr.fedorainfracloud.org/coprs/carlwgeorge/ripgrep/repo/epel-7/carlwgeorge-ripgrep-epel-7.repo
+
+yum -y install zsh mc git curl neovim tmux2u xclip nnn rclone ripgrep htop
+
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
 git clone https://github.com/zsh-users/zsh-completions.git
+
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 rm .zshrc
 git clone https://github.com/mazhigali/dotfiles.git
@@ -15,6 +21,7 @@ mkdir $HOME/.config/nvim
 
 cp $DOTFILES/.zshrc       $HOME/.zshrc
 cp $DOTFILES/init.vim       $HOME/.config/nvim/init.vim
+cp $DOTFILES/.tmux.conf       $HOME/
 
 
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
