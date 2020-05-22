@@ -15,8 +15,6 @@ mkdir $HOME/.config/nvim
 
 cp $DOTFILES/.zshrc       $HOME/.zshrc
 cp $DOTFILES/init.vim       $HOME/.config/nvim/init.vim
-#ln -s .zshrc       $HOME/.zshrc
-#ln -s init.vim       $HOME/.config/nvim/init.vim
 
 
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
