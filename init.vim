@@ -26,7 +26,7 @@ Plug 'scrooloose/nerdtree' , { 'on': 'NERDTreeToggle' }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " fuzzy search file
 Plug 'junegunn/fzf.vim'
 "
-Plug 'fatih/vim-go' , { 'for': 'go', 'do': ':GoUpdateBinaries' } " GOLANG support
+"Plug 'fatih/vim-go' , { 'for': 'go', 'do': ':GoUpdateBinaries' } " GOLANG support
 "Plug 'deoplete-plugins/deoplete-go', { 'do': 'make', 'for': 'go'} "GOLANG support
 "
 "" Syntax Highlighting And Indentation For 100+ Languages
@@ -36,9 +36,12 @@ Plug 'sheerun/vim-polyglot'
 
 "Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx']}
 "Plug 'carlitux/deoplete-ternjs' , { 'for': ['javascript', 'javascript.jsx'] }
+"Plug 'neomake/neomake' , { 'on': 'Neomake', 'for': ['javascript', 'javascript.jsx'] }
 "
 Plug 'prettier/vim-prettier', {'do': 'npm install','for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
-"Plug 'neomake/neomake' , { 'on': 'Neomake', 'for': ['javascript', 'javascript.jsx'] }
+
+"color preview for vim
+Plug 'gko/vim-coloresque',{'for': ['javascript', 'typescript', 'css', 'less', 'scss',  'markdown', 'vue', 'html'] }
 
 "Plug 'zchee/deoplete-clang', { 'for': ['c', 'cpp', 'objc'] }
 "Plug 'rhysd/vim-clang-format', { 'for': ['c', 'cpp', 'objc'] }
@@ -147,11 +150,11 @@ colorscheme base16-default-dark
 set termguicolors
 "highlight lCursor guifg=NONE guibg=Cyan
 "highlight Cursor guifg=white guibg=black
-"highlight iCursor guifg=white guibg=steelblue
+highlight iCursor guifg=red guibg=black
 set guicursor=n-v-c:block-Cursor
-"set guicursor+=i:ver30-Cursor
+"set guicursor+=i:ver50-Cursor
 "set guicursor+=n-v-c:blinkon0
-set guicursor+=i:blinkon10
+"set guicursor+=i:blinkon10
 
 nnoremap <F8> :colorscheme base16-gruvbox-light-soft<CR>
 nnoremap <Leader><F8> :colorscheme base16-default-dark<CR>
@@ -329,7 +332,7 @@ augroup END
 " nnoremap <C-j> :cn<CR>
 " nnoremap <C-k> :cp<CR>
 
-nnoremap <Leader>. :TagbarToggle<CR>
+"nnoremap <Leader>. :TagbarToggle<CR>
 
 "----------------------------------------------
 " Language: Python
@@ -470,6 +473,7 @@ let g:UltiSnipsListSnippets="<A-tab>"
 " Plugin: coc.nvim default settings
 " -------------------------------------------------------------------------------------------------
 "  https://github.com/neoclide/coc.nvim/tree/d5fdd2438119f2a82f6bda681642f246af2f0361
+"
 
 " if hidden is not set, TextEdit might fail.
 set hidden
@@ -594,6 +598,7 @@ let g:prettier#config#require_pragma = 'false'
 " #SIGNIFY {{{
 " Check for only Git
 let g:signify_vcs_list = [ 'git' ]
+" }}}
 
 " RAINBOW {{{
 let g:rainbow_active = 1
