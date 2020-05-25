@@ -2,10 +2,10 @@
 
 export DOTFILES=$HOME/dotfiles
 
-yum -y https://repo.ius.io/ius-release-el7.rpm
+yum -y install https://repo.ius.io/ius-release-el7.rpm
 yum-config-manager --add-repo=https://copr.fedorainfracloud.org/coprs/carlwgeorge/ripgrep/repo/epel-7/carlwgeorge-ripgrep-epel-7.repo
 
-yum -y install zsh mc git curl neovim tmux2u xclip nnn rclone ripgrep htop
+yum -y install zsh mc git curl neovim tmux2u xclip nnn rclone ripgrep htop nodejs
 
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
