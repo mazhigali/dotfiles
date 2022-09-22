@@ -5,7 +5,7 @@
 # Path to your oh-my-zsh installation.
   export ZSH=$HOME/.oh-my-zsh
 #HISTFILE=/home/mad/Dropbox/Mackup/.zhistory
-HISTORY_IGNORE='([bf]g *|cd *|l[alsh]#( *)#|less *|vim# *|nv *|..*|zz*|z *|python *|mkdir *|mv *|go *|rm *|x *|*commit *|l *|cp *|./*|*transfer*|rm *)'
+HISTORY_IGNORE='([bf]g *|cd *|l[alsh]#( *)#|less *|vim# *|nv *|..*|zz*|z *|python *|mkdir *|mv *|go *|rm *|x *|*commit *|l *|cp *|./*|*transfer*|rm *|wget *|man *|mpv *|youtube*)'
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -113,6 +113,7 @@ alias du='du -h --max-depth=1 | sort -h'
 
 alias docker_clean_images='docker rmi $(docker images -a --filter=dangling=true -q)'
 alias docker_clean_ps='docker rm $(docker ps --filter=status=exited --filter=status=created -q)'
+alias docker_clean_all='docker system prune --volumes'
 
 autoload -U compinit && compinit
 compinit
